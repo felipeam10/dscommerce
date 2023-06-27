@@ -21,6 +21,8 @@ public class Product {
     private Double price;
     private String imgUrl;
 
+    //a lista tem que ser um Set<> para que a JPA crie a
+    //tabela adicional com as duas PKs de modo que esses IDs não repitam
     @ManyToMany
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),

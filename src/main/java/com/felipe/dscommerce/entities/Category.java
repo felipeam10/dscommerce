@@ -15,6 +15,8 @@ public class Category {
     private Long id;
     private String name;
 
+    //a lista tem que ser um Set<> para que a JPA crie a
+    //tabela adicional com as duas PKs de modo que esses IDs não repitam
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
     public Category(){}
