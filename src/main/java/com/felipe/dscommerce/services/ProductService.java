@@ -14,9 +14,9 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) // --> realiza uma operacao somente de leitura
     public ProductDTO findById(Long id) {
-        Product product =repository.findById(id).get();
+        Product product = repository.findById(id).get();
         return new ProductDTO(product);
     }
 }

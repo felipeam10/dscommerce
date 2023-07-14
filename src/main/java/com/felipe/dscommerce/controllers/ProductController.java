@@ -19,7 +19,7 @@ public class ProductController {
     @Autowired
     private ProductService service;
     @GetMapping(value = "/{id}")
-    public ProductDTO findById(@PathVariable Long id) {
+    public ProductDTO findById(@PathVariable Long id) { // ---> configura o parametro de rota
         return service.findById(id);
     }
 
