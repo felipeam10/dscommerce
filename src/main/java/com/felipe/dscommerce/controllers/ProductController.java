@@ -1,21 +1,20 @@
 package com.felipe.dscommerce.controllers;
 
 import com.felipe.dscommerce.dto.ProductDTO;
-import com.felipe.dscommerce.entities.Product;
-import com.felipe.dscommerce.repositories.ProductRepository;
 import com.felipe.dscommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping(value = "/products")
 public class ProductController {
 
+//    URL test: http://localhost:8080/products/3
     @Autowired
     private ProductService service;
     @GetMapping(value = "/{id}")
@@ -24,5 +23,10 @@ public class ProductController {
     }
 
 
+//    URL test: http://localhost:8080/products?size=12&page=0&sort=name,desc
+    @GetMapping()
+    public Page<ProductDTO> findAll(Pageable pageable) {
+        return service.findAll(pageable);
+    }
 
 }
