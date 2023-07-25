@@ -1,8 +1,8 @@
 package com.felipe.dscommerce.services.exceptions;
 
-public class ResourceNotFoundException extends RuntimeException { /*RuntimeException não exige o try cath*/
+public class DataBaseException extends RuntimeException { /*RuntimeException não exige o try cath*/
 
-    public ResourceNotFoundException(String msg){
+    public DataBaseException(String msg){
         super(msg);
     }
 
