@@ -9,6 +9,7 @@
 - [Como executar o projeto](#como-executar-o-projeto)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Contribuições](#contribuições-)
+- [Implementando o spring security](#spring-security)
 
 ## Sobre
 
@@ -71,6 +72,62 @@ vendedor pode ter várias vendas. Conforme o diagrama de classes abaixo:
 
 [Voltar ao Índice](#índice)
 
+## Spring security
+
+1. Modelo de domínio User-Role
+
+<div align="center">
+  <img src="src/main/resources/img/user-role.png" alt="Diagrama de Classes">
+</div>
+
+2. Dependências
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-test</artifactId>
+	<scope>test</scope>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-oauth2-authorization-server</artifactId>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+</dependency>
+```
+
+3. Checklist Spring security
+
+    - GrantedAuthority
+    - UserDetails
+    - UserDetailsService
+    - UsernameNotFoundException
+
+
+4. Valores de configuração
+```properties
+    security.client-id=${CLIENT_ID:myclientid}
+    security.client-secret=${CLIENT_SECRET:myclientsecret}
+    security.jwt.duration=${JWT_DURATION:86400}
+    cors.origins=${CORS_ORIGINS:http://localhost:3000,http://localhost:5173}
+```
+
+5. Checklist OAuth2 JWT password grant
+    - Implementação customizada do password grant
+    - Authorization server
+    - Resource server
+
+
+6. Controle de acesso por perfil e rota
+
 ## Tecnologias Utilizadas
 
 Antes de iniciar, assegure-se de ter o ambiente Java corretamente configurado em sua máquina. Abaixo você tem a relação das tecnologias que foram utilizadas no processo de desenvolvimento do projeto.
@@ -97,3 +154,4 @@ Caso tenha uma contribuição que possa melhorar este projeto, por favor, abra u
 5. Abra uma 'Pull Request'
 
 [Voltar ao Índice](#índice)
+
