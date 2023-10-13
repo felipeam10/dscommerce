@@ -1,7 +1,9 @@
 package com.felipe.dscommerce.services;
 
+import com.felipe.dscommerce.dto.CategoryDTO;
 import com.felipe.dscommerce.dto.ProductDTO;
 import com.felipe.dscommerce.dto.ProductMinDTO;
+import com.felipe.dscommerce.entities.Category;
 import com.felipe.dscommerce.entities.Product;
 import com.felipe.dscommerce.repositories.ProductRepository;
 import com.felipe.dscommerce.services.exceptions.ResourceNotFoundException;
@@ -56,6 +58,13 @@ public class ProductService {
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
         entity.setImgUrl(dto.getImgUrl());
+
+        entity.getCategories().clear();
+        for (CategoryDTO catDto : dto.getCategories()) {
+            Category cat = new Category();
+            cat.setId(catDto.getId());
+            entity.getCategories().add(cat);
+        }
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
