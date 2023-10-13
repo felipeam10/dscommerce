@@ -1,7 +1,6 @@
 package com.felipe.dscommerce.dto;
 
 import com.felipe.dscommerce.entities.Product;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 
 public class ProductDTO {
