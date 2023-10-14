@@ -4,6 +4,7 @@ import com.felipe.dscommerce.entities.Order;
 import com.felipe.dscommerce.entities.OrderItem;
 import com.felipe.dscommerce.entities.OrderStatus;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotEmpty;
 import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.sql.DriverPropertyInfo;
@@ -21,6 +22,7 @@ public class OrderDTO {
 
     private PaymentDTO payment;
 
+    @NotEmpty(message = "Deve ter no mínimo um item")
     private List<OrderItemDTO> items = new ArrayList<>();
 
     public OrderDTO(Long id, Instant moment, OrderStatus status, ClientDTO client, PaymentDTO payment) {
