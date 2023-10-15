@@ -154,4 +154,5 @@ public class User implements UserDetails {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
 }
