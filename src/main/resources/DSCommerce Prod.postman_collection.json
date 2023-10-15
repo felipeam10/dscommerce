@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d7c8d8a9-7e70-4fd7-8b9a-1ca28a185257",
+		"_postman_id": "26849401-d2b9-4096-9463-d64a34616e0a",
 		"name": "DSCommerce Prod",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "9794461"
@@ -365,6 +365,33 @@
 							"path": [
 								"users",
 								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Categories",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories"
 							]
 						}
 					},
