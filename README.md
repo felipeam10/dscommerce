@@ -1,5 +1,5 @@
 <div align="left">
-  <h1><strong>DS Commerce</strong></h1>
+  <h1><strong>DS Commerce - Login e controle de acesso</strong></h1>
 </div>
 
 ## Índice
@@ -13,48 +13,47 @@
 
 ## Sobre
 
-Trata-se de um sistema de vendas (Sale) e vendedores (Seller). Cada venda está para um vendedor, e um
-vendedor pode ter várias vendas. Conforme o diagrama de classes abaixo:
+O sistema deve manter um cadastro de usuário, produtos e suas categorias. Cada
+usuário possui nome, email, telefone, data de nascimento e uma senha de acesso. Os
+dados dos produtos são: nome, descrição, preço e imagem. O sistema deve apresentar
+um catálogo de produtos, os quais podem ser filtrados pelo nome do produto. A partir
+desse catálogo, o usuário pode selecionar um produto para ver seus detalhes e para
+decidir se o adiciona a um carrinho de compras. O usuário pode incluir e remover itens
+do carrinho de compra, bem como alterar as quantidades de cada item. Uma vez que o
+usuário decida encerrar o pedido, o pedido deve então ser salvo no sistema com o status
+de "aguardando pagamento". Os dados de um pedido são: instante em que ele foi salvo,
+status, e uma lista de itens, onde cada item se refere a um produto e sua quantidade no
+pedido. O status de um pedido pode ser: aguardando pagamento, pago, enviado,
+entregue e cancelado. Quando o usuário paga por um pedido, o instante do pagamento
+deve ser registrado. Os usuários do sistema podem ser clientes ou administradores,
+sendo que todo usuário cadastrado por padrão é cliente. Usuários não identificados
+podem se cadastrar no sistema, navegar no catálogo de produtos e no carrinho de
+compras. Clientes podem atualizar seu cadastro no sistema, registrar pedidos e visualizar
+seus próprios pedidos. Usuários administradores tem acesso à área administrativa onde
+pode acessar os cadastros de usuários, produtos e categorias.Conforme o modelo conceitual abaixo:
 
 <div align="center">
-  <img src="src/main/resources/img/user-role.png" alt="Diagrama de Classes">
+  <img src="src/main/resources/img/modelo_conceitual.png" alt="Diagrama de Classes">
 </div>
 
 [Voltar ao Índice](#índice)
 
 ## Casos de uso
 
-- **Relatório de vendas**
-
-    1. [IN] O usuário informa, opcionalmente, data inicial, data final e um trecho do nome do vendedor.
-
-    2. [OUT] O sistema informa uma listagem paginada contendo id, data, quantia vendida e nome do
-       vendedor, das vendas que se enquadrem nos dados informados.
-
-       **Informações complementares**
-
-        -  Se a data final não for informada, considerar a data atual do sistema. Para instanciar a data atual,
-
-       utilize o comando:
-
-        - Se a data inicial não for informada, considerar a data de 1 ano antes da data final. P
-
-        - Se o nome não for informado, considerar o texto vazio.
-
-        - Dica: receba todos os dados como String no controller, e faça os tratamentos
-
-
-
-- **Sumário de vendas por vendedor**
-
-    1. [IN] O usuário informa, opcionalmente, data inicial, data final.
-
-    2. [OUT] O sistema informa uma listagem contendo nome do vendedor e soma de vendas deste vendedor
-       no período informado.
-
-  **Informações complementares:**
-
-    -  As mesmas do caso de uso Relatório de vendas
+| Caso de uso         | Visão geral                                                                                             | Visão geral    |
+|---------------------|---------------------------------------------------------------------------------------------------------|----------------|
+| Manter produtos     | CRUD de produtos, podendo filtrar itens pelo nome                                                       | Somente Admin  |
+| Manter categorias   | CRUD de categorias, podendo filtrar itens pelo nome                                                     | Somente Admin  |
+| Manter usuários     | CRUD de usuários, podendo filtrar itens pelo nome                                                       | Somente Admin  | 
+| Gerenciar carrinho  | Incluir e remover itens do carrinho de compras, bem como alterar as quantidades do produto em cada item | Público        |
+| Consultar catálogo  | Listar produtos disponíveis, podendo filtrar produtos pelo nome                                         | Público        |
+| Sign up             | Cadastrar-se no sistema                                                                                 | Público        |
+| Login               | Efetuar login no sistema                                                                                | Público        |                             
+| Registrar pedido    | Salvar no sistema um pedido a partir dos dados do carrinho de compras informado                         | Usuário logado |
+| Atualizar perfil    | Atualizar o próprio cadastro                                                                            | Usuário logado |
+| Visualizar pedidos  | Visualizar os pedidos que o próprio usuário já fez                                                      | Usuário logado | 
+| Registrar pagamento | Salvar no sistema os dados do pagamento de um pedido                                                    | Somente Admin  |
+| Reportar pedidos    | Relatório de pedidos, podendo ser filtrados por data                                                    | Somente Admin  |
 
 [Voltar ao Índice](#índice)
 
@@ -62,13 +61,17 @@ vendedor pode ter várias vendas. Conforme o diagrama de classes abaixo:
 
 1. Clonar o projeto a partir do GitHub
 
-   ````https://github.com/felipeam10/desafio-consulta-vendas````
+   ````https://github.com/felipeam10/dscommerce.git````
 
 2. Em sua IDE de preferência, abra o projeto a partir do diretório que o mesmo foi clonado. 
 
 3. Importe as Collections do postman a partir do Link : https://www.getpostman.com/collections/a5929fa46ba2b6a991d4
+4. Ou pegue as collections atualizadas no final do projeto:  
 
-4. Execute os [Casos de uso](#casos-de-uso)
+     src/main/resources/DSCommerce Prod.postman_collection.json
+     src/main/resources/DSCommerce Auth.postman_environment.json       
+
+5. Execute os [Casos de uso](#casos-de-uso)
 
 [Voltar ao Índice](#índice)
 
