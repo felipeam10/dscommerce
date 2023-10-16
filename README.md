@@ -68,8 +68,8 @@ pode acessar os cadastros de usuários, produtos e categorias.Conforme o modelo 
 3. Importe as Collections do postman a partir do Link : https://www.getpostman.com/collections/a5929fa46ba2b6a991d4
 4. Ou pegue as collections atualizadas no final do projeto:  
 
-     src/main/resources/DSCommerce Prod.postman_collection.json
-     src/main/resources/DSCommerce Auth.postman_environment.json       
+    - src/main/resources/DSCommerce Prod.postman_collection.json
+    - src/main/resources/DSCommerce Auth.postman_environment.json       
 
 5. Execute os [Casos de uso](#casos-de-uso)
 
