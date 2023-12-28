@@ -83,16 +83,6 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.7</version>
-				<configuration>
-					<excludes>
-						<exclude>com/felipe/dscommerce/DscommerceApplication.class</exclude>
-						<exclude>com/felipe/dscommerce/config/**</exclude>
-						<exclude>com/felipe/dscommerce/entities/**</exclude>
-						<exclude>com/felipe/dscommerce/dto/**</exclude>
-						<exclude>com/felipe/dscommerce/controllers/handlers/**</exclude>
-						<exclude>com/felipe/dscommerce/services/exceptions/**</exclude>
-					</excludes>
-				</configuration>
 				<executions>
 					<execution>
 						<goals>
