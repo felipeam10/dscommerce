@@ -1,6 +1,7 @@
 package com.felipe.dscommerce.service;
 
 import com.felipe.dscommerce.dto.ProductDTO;
+import com.felipe.dscommerce.dto.ProductMinDTO;
 import com.felipe.dscommerce.entities.Product;
 import com.felipe.dscommerce.repositories.ProductRepository;
 import com.felipe.dscommerce.services.ProductService;
@@ -13,9 +14,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(SpringExtension.class)
 public class ProductServiceTests {
@@ -32,6 +40,8 @@ public class ProductServiceTests {
     private String productName;
     private Product product;
 
+    private PageImpl<Product> page;
+
     @BeforeEach
     void setUp() throws Exception {
         existingProductId = 1L;
@@ -39,8 +49,11 @@ public class ProductServiceTests {
 
         productName = "Phone";
         product = ProductFactory.createProduct(productName);
+        page = new PageImpl<>(List.of(product));
+
         Mockito.when(repository.findById(existingProductId)).thenReturn(Optional.of(product));
         Mockito.when(repository.findById(nonExistingProductId)).thenReturn(Optional.empty());
+        Mockito.when(repository.seachByName(any(), (Pageable)any())).thenReturn(page);
     }
 
     @Test
@@ -56,5 +69,15 @@ public class ProductServiceTests {
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
             service.findById(nonExistingProductId);
         });
+    }
+
+    @Test
+    public void findAllShoudReturnPagedProductMinDTO() {
+        Pageable pageable = PageRequest.of(0, 12);
+        String name = "Playstation";
+        Page<ProductMinDTO> result = service.findAll(name, pageable);
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.getSize(), 1);
+        Assertions.assertEquals(result.iterator().next().getName(), productName);
     }
 }
