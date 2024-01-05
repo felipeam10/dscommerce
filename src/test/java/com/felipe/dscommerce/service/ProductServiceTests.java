@@ -58,8 +58,8 @@ public class ProductServiceTests {
         Mockito.when(repository.findById(nonExistingProductId)).thenReturn(Optional.empty());
         Mockito.when(repository.seachByName(any(), (Pageable)any())).thenReturn(page);
         Mockito.when(repository.save(any())).thenReturn(product);
-//        Mockito.when(repository.getReferenceById(existingProductId)).thenReturn(product);
-//        Mockito.when(repository.getReferenceById(nonExistingProductId)).thenThrow(EntityNotFoundException.class);
+        Mockito.when(repository.getReferenceById(existingProductId)).thenReturn(product);
+        Mockito.when(repository.getReferenceById(nonExistingProductId)).thenThrow(EntityNotFoundException.class);
     }
 
     @Test
@@ -95,18 +95,18 @@ public class ProductServiceTests {
         Assertions.assertEquals(result.getName(), product.getName());
     }
 
-//    @Test
-//    public void updateShouldReturnProductDTOWhenIdExists() {
-//        ProductDTO result = service.update(existingProductId, productDTO);
-//        Assertions.assertNotNull(result);
-//        Assertions.assertEquals(result.getId(), existingProductId);
-//        Assertions.assertEquals(result.getName(), productName);
-//    }
-//
-//    @Test
-//    public void updateShouldReturnResourceNotFoundExceptionWhenIdDoesNotExists() {
-//        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-//            service.update(nonExistingProductId, productDTO);
-//        });
-//    }
+    @Test
+    public void updateShouldReturnProductDTOWhenIdExists() {
+        ProductDTO result = service.update(existingProductId, productDTO);
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.getId(), existingProductId);
+        Assertions.assertEquals(result.getName(), productName);
+    }
+
+    @Test
+    public void updateShouldReturnResourceNotFoundExceptionWhenIdDoesNotExists() {
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            service.update(nonExistingProductId, productDTO);
+        });
+    }
 }
