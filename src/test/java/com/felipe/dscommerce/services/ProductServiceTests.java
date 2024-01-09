@@ -1,10 +1,9 @@
-package com.felipe.dscommerce.service;
+package com.felipe.dscommerce.services;
 
 import com.felipe.dscommerce.dto.ProductDTO;
 import com.felipe.dscommerce.dto.ProductMinDTO;
 import com.felipe.dscommerce.entities.Product;
 import com.felipe.dscommerce.repositories.ProductRepository;
-import com.felipe.dscommerce.services.ProductService;
 import com.felipe.dscommerce.services.exceptions.DataBaseException;
 import com.felipe.dscommerce.services.exceptions.ResourceNotFoundException;
 import com.felipe.dscommerce.tests.ProductFactory;

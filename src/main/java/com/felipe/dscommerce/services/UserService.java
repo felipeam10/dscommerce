@@ -7,12 +7,9 @@ import com.felipe.dscommerce.entities.User;
 import com.felipe.dscommerce.repositories.UserRepository;
 import com.felipe.dscommerce.util.CustomUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +19,7 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @Autowired
     private CustomUserUtil customUserUtil;
@@ -30,7 +27,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        List<UserDetailsProjection> result = userRepository.searchUserAndRolesByEmail(username);
+        List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
         if (result.size() == 0) {
             throw new UsernameNotFoundException("User not found");
         }
@@ -44,11 +41,12 @@ public class UserService implements UserDetailsService {
     }
 
     protected User authenticated() {
-        try{
+        try {
             String username = customUserUtil.getLoggedUsername();
-            return userRepository.findByEmail(username).get();
-        } catch (Exception e) {
-            throw new UsernameNotFoundException("User not found");
+            return repository.findByEmail(username).get();
+        }
+        catch (Exception e) {
+            throw new UsernameNotFoundException("Invalid user");
         }
     }
 

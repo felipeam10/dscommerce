@@ -1,9 +1,8 @@
-package com.felipe.dscommerce.service;
+package com.felipe.dscommerce.services;
 
 import com.felipe.dscommerce.dto.CategoryDTO;
 import com.felipe.dscommerce.entities.Category;
 import com.felipe.dscommerce.repositories.CategoryRepository;
-import com.felipe.dscommerce.services.CategoryService;
 import com.felipe.dscommerce.tests.CategoryFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
