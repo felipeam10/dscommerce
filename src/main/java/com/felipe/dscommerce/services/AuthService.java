@@ -13,11 +13,11 @@ public class AuthService {
 
     public void validateSelfOrAdmin(long userId) {
         User me = userService.authenticated();
-        if (me.hasRole("ROLE_ADMIN")) {
+        if(me.hasRole("ROLE_ADMIN")) {
             return;
         }
-        if (!me.getId().equals(userId)) {
-            throw new ForbiddenException("Access denied!!! Should be self or admin");
+        if(!me.getId().equals(userId)) {
+            throw new ForbiddenException("Access denied. Should be self or admin");
         }
     }
 }
