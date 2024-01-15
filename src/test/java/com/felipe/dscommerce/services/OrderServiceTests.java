@@ -2,6 +2,7 @@ package com.felipe.dscommerce.services;
 
 import com.felipe.dscommerce.dto.OrderDTO;
 import com.felipe.dscommerce.entities.Order;
+import com.felipe.dscommerce.entities.OrderItem;
 import com.felipe.dscommerce.entities.Product;
 import com.felipe.dscommerce.entities.User;
 import com.felipe.dscommerce.repositories.OrderItemRepository;
@@ -128,6 +129,21 @@ public class OrderServiceTests {
         order.setClient(new User());
         orderDTO = new OrderDTO(order);
         Assertions.assertThrows(UsernameNotFoundException.class, () -> {
+            OrderDTO result = service.insert(orderDTO);
+        });
+    }
+
+    @Test
+    public void insertshouldthrowsEntityNotFoundExceptionWhenOrderProductIdDoesNotExists() {
+        Mockito.when(userService.authenticated()).thenReturn(client);
+
+        product.setId(nonExistingProductId);
+        OrderItem orderItem = new OrderItem(order, product, 2, 10.0);
+        order.getItems().add(orderItem);
+
+        orderDTO = new OrderDTO(order);
+
+        Assertions.assertThrows(EntityNotFoundException.class, () -> {
             OrderDTO result = service.insert(orderDTO);
         });
     }
