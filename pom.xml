@@ -89,8 +89,9 @@
 						<exclude>com/felipe/dscommerce/config/**</exclude>
 						<exclude>com/felipe/dscommerce/entities/**</exclude>
 						<exclude>com/felipe/dscommerce/dto/**</exclude>
-						<exclude>com/felipe/dscommerce/controllers/handlers/**</exclude>
+						<exclude>com/felipe/dscommerce/controllers/**</exclude>
 						<exclude>com/felipe/dscommerce/services/exceptions/**</exclude>
+						<exclude>com/felipe/dscommerce/util/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
