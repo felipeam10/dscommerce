@@ -104,7 +104,7 @@ public class ProductServiceTests {
 
     @Test
     public void updateShouldReturnProductDTOWhenIdExists() {
-        ProductDTO result = service.update(existingProductId, productDTO);
+            ProductDTO result = service.update(existingProductId, productDTO);
         Assertions.assertNotNull(result);
         Assertions.assertEquals(result.getId(), existingProductId);
         Assertions.assertEquals(result.getName(), productName);
