@@ -285,4 +285,15 @@ public class ProductControllerIT {
         result.andExpect(status().isUnauthorized());
 
     }
+
+    @Test
+    public void deleteShouldReturnOkWhenAdminLogged() throws Exception {
+        ResultActions result =
+                mockMvc.perform(get("/products/{id}", existingProductId)
+                        .header("Authorization", "Bearer " + invalidToken)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isUnauthorized());
+
+    }
 }
