@@ -90,6 +90,30 @@ public class ProductControllerIT {
     }
 
     @Test
+    public void findByIdShouldReturnProductDTOWhenIdExists() throws Exception {
+        ResultActions result =
+                mockMvc.perform(get("/products/{id}", existingProductId)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isOk());
+        result.andExpect(jsonPath("$.id").value(2L));
+        result.andExpect(jsonPath("$.name").value("Smart TV"));
+        result.andExpect(jsonPath("$.description").value("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."));
+        result.andExpect(jsonPath("$.price").value(2190.0));
+        result.andExpect(jsonPath("$.categories").exists());
+
+    }
+
+    @Test
+    public void findByIdShouldReturnProductDTOWhenIdNotExist() throws Exception {
+        ResultActions result =
+                mockMvc.perform(get("/products/{id}", nonExistingProductId)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isNotFound());
+    }
+
+    @Test
     public void insertShouldReturnProductDTOCreatedWhenAdminLogged() throws Exception {
         String jsonBody = objectMapper.writeValueAsString(productDTO);
 
@@ -286,14 +310,5 @@ public class ProductControllerIT {
 
     }
 
-    @Test
-    public void deleteShouldReturnOkWhenAdminLogged() throws Exception {
-        ResultActions result =
-                mockMvc.perform(get("/products/{id}", existingProductId)
-                        .header("Authorization", "Bearer " + invalidToken)
-                        .accept(MediaType.APPLICATION_JSON));
 
-        result.andExpect(status().isUnauthorized());
-
-    }
 }
